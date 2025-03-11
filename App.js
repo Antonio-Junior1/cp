@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { Alert, Button, Image, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 export default function App() {
   const [produto, setProduto] = useState('');
   const [valor, setValor] = useState('');
@@ -26,7 +26,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Calculadora de Aumento de Preço</Text>
-      { }
+
       <View style={styles.imageContainer}>
         <Image
           source={{ uri: 'https://www.onflag.com.br/wp-content/uploads/qual-nivel-presenca-digital-empresa-calcule-alcance-aqui.jpg' }}
@@ -53,7 +53,10 @@ export default function App() {
         value={aumentoPercentual}
         onChangeText={setAumentoPercentual}
       />
-      <Button title="Calcular Aumento" onPress={calcularValor} />
+
+      <TouchableOpacity style={styles.button} onPress={calcularValor}>
+        <Text style={styles.buttonText}>Calcular Aumento</Text>
+      </TouchableOpacity>
       {resultadoAumento && (
         <View style={styles.resultContainer}>
           <Text style={styles.resultText}>Produto: {resultadoAumento.produto}</Text>
@@ -126,5 +129,22 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#00796b',
     marginBottom: 10,
+  },
+  button: {
+    backgroundColor: '#00796b',
+    paddingVertical: 12,
+    paddingHorizontal: 40,
+    borderRadius: 25,
+    marginTop: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
