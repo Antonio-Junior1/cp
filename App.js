@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, Button, Image, StyleSheet, Text, TextInput, View } from 'react-native';
 export default function App() {
   const [produto, setProduto] = useState('');
   const [valor, setValor] = useState('');
@@ -24,23 +24,30 @@ export default function App() {
     });
   };
   return (
-    <View style={styles.mainContainer}>
+    <View style={styles.container}>
       <Text style={styles.header}>Calculadora de Aumento de Preço</Text>
+      { }
+      <View style={styles.imageContainer}>
+        <Image
+          source={{ uri: 'https://www.onflag.com.br/wp-content/uploads/qual-nivel-presenca-digital-empresa-calcule-alcance-aqui.jpg' }}
+          style={styles.productImage}
+        />
+      </View>
       <TextInput
-        style={styles.inputField}
+        style={styles.input}
         placeholder="Nome do Produto"
         value={produto}
         onChangeText={setProduto}
       />
       <TextInput
-        style={styles.inputField}
+        style={styles.input}
         placeholder="Valor Original"
         keyboardType="numeric"
         value={valor}
         onChangeText={setValor}
       />
       <TextInput
-        style={styles.inputField}
+        style={styles.input}
         placeholder="Aumento (%)"
         keyboardType="numeric"
         value={aumentoPercentual}
@@ -48,12 +55,12 @@ export default function App() {
       />
       <Button title="Calcular Aumento" onPress={calcularValor} />
       {resultadoAumento && (
-        <View style={styles.resultadoBox}>
-          <Text style={styles.resultadoText}>Produto: {resultadoAumento.produto}</Text>
-          <Text style={styles.resultadoText}>Valor Original: R$ {resultadoAumento.valorOriginal.toFixed(2)}</Text>
-          <Text style={styles.resultadoText}>Aumento: {resultadoAumento.percentualAumento}%</Text>
-          <Text style={styles.resultadoText}>Aumento Calculado: R$ {resultadoAumento.aumentoCalculado.toFixed(2)}</Text>
-          <Text style={styles.resultadoText}>Novo Preço: R$ {resultadoAumento.valorComAumento.toFixed(2)}</Text>
+        <View style={styles.resultContainer}>
+          <Text style={styles.resultText}>Produto: {resultadoAumento.produto}</Text>
+          <Text style={styles.resultText}>Valor Original: R$ {resultadoAumento.valorOriginal.toFixed(2)}</Text>
+          <Text style={styles.resultText}>Aumento: {resultadoAumento.percentualAumento}%</Text>
+          <Text style={styles.resultText}>Aumento Calculado: R$ {resultadoAumento.aumentoCalculado.toFixed(2)}</Text>
+          <Text style={styles.resultText}>Novo Preço: R$ {resultadoAumento.valorComAumento.toFixed(2)}</Text>
         </View>
       )}
       <StatusBar style="auto" />
@@ -61,37 +68,63 @@ export default function App() {
   );
 }
 const styles = StyleSheet.create({
-  mainContainer: {
+  container: {
     flex: 1,
-    backgroundColor: '#f4f4f9',
+    backgroundColor: '#e0f7fa',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
   },
   header: {
-    fontSize: 26,
-    marginBottom: 20,
+    fontSize: 28,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#00796b',
+    marginBottom: 20,
+    textAlign: 'center',
   },
-  inputField: {
-    height: 45,
-    borderColor: '#ccc',
+  imageContainer: {
+    width: '80%',
+    height: 150,
+    marginBottom: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+  },
+  productImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 10,
+    resizeMode: 'cover',
+  },
+  input: {
+    width: '90%',
+    height: 50,
+    borderColor: '#00796b',
     borderWidth: 1,
-    marginBottom: 15,
-    paddingHorizontal: 10,
-    width: '90%',
-    borderRadius: 5,
-  },
-  resultadoBox: {
-    marginTop: 30,
-    padding: 20,
-    backgroundColor: '#e7e7e7',
     borderRadius: 8,
-    width: '90%',
+    paddingLeft: 15,
+    marginBottom: 15,
+    backgroundColor: '#ffffff',
   },
-  resultadoText: {
+  resultContainer: {
+    marginTop: 20,
+    padding: 20,
+    backgroundColor: '#ffffff',
+    borderRadius: 10,
+    width: '90%',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+  },
+  resultText: {
     fontSize: 16,
+    color: '#00796b',
     marginBottom: 10,
   },
 });
